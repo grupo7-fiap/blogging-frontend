@@ -1,16 +1,15 @@
-import GlobalStyle from './globalStyles';
-import ExampleComponent from './components/ExampleComponent';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import PostList from './components/PostList';
+import PostDetails from './components/PostDetails';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <>
-      <GlobalStyle />
-      <div>
-        <h1>Hello, World!</h1>
-        <ExampleComponent />
-      </div>
-    </>
+    <Routes>
+      <Route path="/" element={<PostList />} />
+      <Route path="/posts/:id" element={<PostDetails />} />
+    </Routes>
   );
-}
+};
 
 export default App;
