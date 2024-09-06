@@ -23,8 +23,15 @@ export const Title = styled.h1`
   text-align: center;
 `;
 
+export const Description = styled.p`
+  font-size: 1rem !important; 
+  color: #4d4d4d !important; 
+  line-height: 1.2 !important; 
+  margin-bottom: 10px !important;
+`;
+
 export const Content = styled.p`
-  font-size: 1.25rem;
+  font-size: 1.25rem !important;
   color: #c9c9c9;
   line-height: 1.6;
   margin-bottom: 20px;

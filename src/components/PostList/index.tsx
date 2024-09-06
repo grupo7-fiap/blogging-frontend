@@ -31,7 +31,7 @@ const PostList: React.FC = () => {
         {posts.map((post) => (
           <PostCard key={post.id}>
             <PostTitle>{post.title || 'Sem título'}</PostTitle>
-            <PostDescription>{'Ver mais...'}</PostDescription>
+            <PostDescription>{post.description || 'Sem descrição'}</PostDescription>
             <ViewButton onClick={() => handleViewPost(post.id)}>Visualizar</ViewButton>
           </PostCard>
         ))}
