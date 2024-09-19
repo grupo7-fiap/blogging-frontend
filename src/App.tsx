@@ -1,14 +1,8 @@
-import GlobalStyle from './globalStyles';
-import ExampleComponent from './components/ExampleComponent';
-
+import HomeComponent from "./components/HomeComponent";
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <div>
-        <h1>Hello, World!</h1>
-        <ExampleComponent />
-      </div>
+      <HomeComponent />
     </>
   );
 }
