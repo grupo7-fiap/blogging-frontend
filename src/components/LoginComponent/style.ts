@@ -64,7 +64,6 @@ export const BackButton = styled.button`
   color: white;
   border: none;
   font-size: 18px;
-  width: 500px;
   line-height: 20px;
   font-weight: bold;
   cursor: pointer;

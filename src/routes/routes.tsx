@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomeComponent from "../components/HomeComponent";
 import LoginComponent from "../components/LoginComponent";
+import ManagePostComponent from "../components/ManagePost";
 
 const AppRoutes = () => {
   return (
@@ -9,6 +10,8 @@ const AppRoutes = () => {
         <Route path="/" element={<HomeComponent />} />
 
         <Route path="/login" element={<LoginComponent />} />
+
+        <Route path="/manage" element={<ManagePostComponent />} />
       </Routes>
     </Router>
   );

@@ -15,6 +15,14 @@ const LoginComponent = () => {
   const handleBack = () => {
     navigate("/");
   };
+
+  const handleCreatePost = () => {
+    navigate("/manage", { state: { action: "create" } });
+  };
+
+  const handleEditPost = () => {
+    navigate("/manage", { state: { action: "edit" } });
+  };
   return (
     <>
       <LoginContainer>
@@ -26,7 +34,8 @@ const LoginComponent = () => {
           <Title>Login</Title>
           <Input type="text" placeholder="Username" />
           <Input type="password" placeholder="Password" />
-          <Button>Sign In</Button>
+          <Button onClick={handleCreatePost}>Sign In</Button>
+          <Button onClick={handleEditPost}>Editar</Button>
         </LoginBox>
       </LoginContainer>
     </>
