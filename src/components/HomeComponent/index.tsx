@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   StyledButton,
@@ -8,10 +9,16 @@ import {
 } from "./style";
 
 const HomeComponent = () => {
+  const navigate = useNavigate();
+
+  const goToLoginScreen = () => {
+    navigate("/login");
+  };
+
   return (
     <>
       <Container>
-        <StyledButton>
+        <StyledButton onClick={goToLoginScreen}>
           <MainText>PROFESSORES E FUNCIONÁRIOS</MainText>
           <Divider />
           <ButtonText>Acesse o portal de professores e funcionários</ButtonText>
