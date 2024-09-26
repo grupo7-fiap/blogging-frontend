@@ -1,19 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Title, PostsGrid, PostCard, PostTitle, PostDescription, ViewButton } from './style';
-import api from '../../services/api'; 
-import { useNavigate } from 'react-router-dom'; 
+import React, { useEffect, useState } from "react";
+import {
+  Container,
+  Title,
+  PostsGrid,
+  PostCard,
+  PostTitle,
+  PostDescription,
+  ViewButton,
+} from "./style";
+import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 const PostList: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await api.get('/posts');
-        setPosts(response.data.data); 
+        const response = await api.get("/posts");
+        setPosts(response.data.data);
       } catch (error) {
-        console.error('Erro ao buscar posts:', error);
+        console.error("Erro ao buscar posts:", error);
       }
     };
 
@@ -21,7 +29,7 @@ const PostList: React.FC = () => {
   }, []);
 
   const handleViewPost = (id: number) => {
-    navigate(`/posts/${id}`); 
+    navigate(`/posts/${id}`);
   };
 
   return (
@@ -30,9 +38,13 @@ const PostList: React.FC = () => {
       <PostsGrid>
         {posts.map((post) => (
           <PostCard key={post.id}>
-            <PostTitle>{post.title || 'Sem título'}</PostTitle>
-            <PostDescription>{post.description || 'Sem descrição'}</PostDescription>
-            <ViewButton onClick={() => handleViewPost(post.id)}>Visualizar</ViewButton>
+            <PostTitle>{post.title || "Sem título"}</PostTitle>
+            <PostDescription>
+              {post.description || "Sem descrição"}
+            </PostDescription>
+            <ViewButton onClick={() => handleViewPost(post.id)}>
+              Visualizar
+            </ViewButton>
           </PostCard>
         ))}
       </PostsGrid>
