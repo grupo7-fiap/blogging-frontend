@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 800px;
+  /* max-width: 800px; */
   margin: 40px auto;
   padding: 20px;
   background-color: #1c1c1c;
@@ -18,15 +18,15 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
   font-size: 2.5rem;
-  color: #ff2d55;
+  color: #800020;
   margin-bottom: 20px;
   text-align: center;
 `;
 
 export const Description = styled.p`
-  font-size: 1rem !important; 
-  color: #4d4d4d !important; 
-  line-height: 1.2 !important; 
+  font-size: 1rem !important;
+  color: #4d4d4d !important;
+  line-height: 1.2 !important;
   margin-bottom: 10px !important;
 `;
 
@@ -39,7 +39,7 @@ export const Content = styled.p`
 
 export const Author = styled.p`
   font-size: 1rem;
-  color: #ff2d55;
+  color: #800020;
   text-align: right;
   font-style: italic;
   margin-top: 30px;
@@ -48,11 +48,11 @@ export const Author = styled.p`
 export const Loading = styled.p`
   text-align: center;
   font-size: 1.5rem;
-  color: #ff2d55;
+  color: #800020;
 `;
 
 export const BackButton = styled.button`
-  background-color: #ff2d55;
+  background-color: #800020;
   color: white;
   padding: 10px 20px;
   font-size: 1rem;
@@ -62,7 +62,7 @@ export const BackButton = styled.button`
   margin-bottom: 20px;
 
   &:hover {
-    background-color: #ff4466;
+    background-color: #800020;
     transition: background-color 0.3s ease;
   }
 `;

@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 20px;
   background-color: #1c1c1c; // fundo escuro, semelhante ao da imagem
@@ -15,7 +15,7 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
   text-align: center;
-  color: #ff2d55; // cor vermelho-rosa semelhante à imagem
+  color: #800020;
   margin-bottom: 40px;
 `;
 
@@ -46,7 +46,7 @@ export const PostCard = styled.div`
 
 export const PostTitle = styled.h2`
   font-size: 1.5rem;
-  color: #ff2d55; // cor para o título do post
+  color: #800020;
   margin-bottom: 15px;
 `;
 
@@ -57,7 +57,7 @@ export const PostDescription = styled.p`
 `;
 
 export const ViewButton = styled.button`
-  background-color: #ff2d55;
+  background-color: #800020;
   color: white;
   padding: 10px 20px;
   font-size: 1rem;
@@ -67,7 +67,7 @@ export const ViewButton = styled.button`
   align-self: flex-start;
 
   &:hover {
-    background-color: #ff4466;
+    background-color: #800020;
     transition: background-color 0.3s ease;
   }
 `;
