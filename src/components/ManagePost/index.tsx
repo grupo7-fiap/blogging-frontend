@@ -61,7 +61,6 @@ const ManagePostComponent = () => {
     "Biologia",
     "Tecnologia",
     "Informática",
-    "Saúde",
     "Economia",
     "Filosofia",
     "Sociologia",
@@ -111,7 +110,6 @@ const ManagePostComponent = () => {
       console.log("erro", body);
 
       const response = await api.post(`/posts`, body);
-      console.log("heyy1", response);
       setCreateSuccess(true);
     } catch (error) {
       console.error("Erro ao criar o post:", error);
