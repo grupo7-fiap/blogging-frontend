@@ -30,6 +30,7 @@ const ManagePostComponent = () => {
 
   const [title, setTitle] = useState("");
   const [descricao, setDescricao] = useState("");
+  const [conteudo, setConteudo] = useState("");
   const [autor, setAutor] = useState("");
   const [theme, setTheme] = useState("");
   const navigate = useNavigate();
@@ -92,10 +93,13 @@ const ManagePostComponent = () => {
     try {
       const body = {
         title: title,
-        content: descricao,
+        description: descricao,
+        content: conteudo,
         author: autor,
         subject: theme,
       };
+      console.log('erro',body);
+
       const response = await api.post(`/posts`, body);
       console.log("heyy1", response);
       setCreateSuccess(true);
@@ -109,7 +113,8 @@ const ManagePostComponent = () => {
     try {
       const body = {
         title: title,
-        content: descricao,
+        description: descricao,
+        content: conteudo,
         author: autor,
         subject: theme,
       };
@@ -127,6 +132,7 @@ const ManagePostComponent = () => {
     if (action === "criar") {
       setTitle("");
       setDescricao("");
+      setConteudo("");
       setAutor("");
       setTheme("");
     }
@@ -141,6 +147,7 @@ const ManagePostComponent = () => {
       setShowCreateModal(false);
       setTitle("");
       setDescricao("");
+      setConteudo("");
       setAutor("");
       setTheme("");
       navigate("/login"); //Alterar para navegar para a tela do matheus
@@ -158,6 +165,7 @@ const ManagePostComponent = () => {
       setShowEditModal(false);
       setTitle("");
       setDescricao("");
+      setConteudo("");
       setAutor("");
       setTheme("");
       navigate("/login"); //Alterar para navegar para a tela do matheus
@@ -199,6 +207,14 @@ const ManagePostComponent = () => {
               placeholder="Digite a descrição da postagem"
               value={descricao}
               onChange={(e) => setDescricao(e.target.value)}
+            />
+
+            {/* DESCRIÇÃO */}
+            <Label htmlFor="title">Conteúdo</Label>
+            <Textarea
+              placeholder="Digite o conteúdo da postagem"
+              value={conteudo}
+              onChange={(e) => setConteudo(e.target.value)}
             />
 
             {/* AUTOR */}

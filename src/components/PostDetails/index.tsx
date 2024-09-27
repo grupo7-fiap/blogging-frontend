@@ -42,7 +42,7 @@ const PostDetails: React.FC = () => {
 
   return (
     <Container>
-      <BackButton onClick={() => navigate("/")}>Voltar para a Lista</BackButton>
+      <BackButton onClick={() => navigate("/posts")}>Voltar para a Lista</BackButton>
       <Title>{post.title || "Sem título"}</Title>
       <Description>{post.description || "Sem descrição"}</Description>
       <Content>{post.content || "Sem conteúdo"}</Content>
