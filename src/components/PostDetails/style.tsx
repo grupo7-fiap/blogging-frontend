@@ -2,20 +2,20 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  /* max-width: 800px; */
-  margin: 40px auto;
+  min-height: 100vh;
+  margin: 0 auto;
   padding: 20px;
   background-color: #1c1c1c;
   color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box; /* Adicione isso para incluir padding na largura total */
 
   @media (max-width: 768px) {
     padding: 10px;
     margin: 20px;
   }
 `;
-
 export const Title = styled.h1`
   font-size: 2.5rem;
   color: #800020;
@@ -42,8 +42,9 @@ export const Author = styled.p`
   color: #800020;
   text-align: right;
   font-style: italic;
-  margin-top: 30px;
+  margin-top: 10px; 
 `;
+
 
 export const Loading = styled.p`
   text-align: center;
