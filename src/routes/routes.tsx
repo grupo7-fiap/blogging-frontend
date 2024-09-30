@@ -4,6 +4,8 @@ import LoginComponent from "../components/LoginComponent";
 import ManagePostComponent from "../components/ManagePost";
 import PostDetails from "../components/PostDetails";
 import PostList from "../components/PostList";
+import AdminPostList from "../components/AdminPostList";
+
 
 const AppRoutes = () => {
   return (
@@ -18,6 +20,8 @@ const AppRoutes = () => {
         <Route path="/posts" element={<PostList />} />
 
         <Route path="/posts/:id" element={<PostDetails />} />
+
+        <Route path="/posts/admin" element={<AdminPostList />} />
       </Routes>
     </Router>
   );
