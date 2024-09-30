@@ -17,6 +17,7 @@ import {
   ModalTitle,
   ModalBody,
   CloseButton,
+  Spinner,
 } from "./style";
 
 interface LocationState {
@@ -30,6 +31,7 @@ const ManagePostComponent = () => {
 
   const [title, setTitle] = useState("");
   const [descricao, setDescricao] = useState("");
+  const [conteudo, setConteudo] = useState("");
   const [autor, setAutor] = useState("");
   const [theme, setTheme] = useState("");
   const navigate = useNavigate();
@@ -40,6 +42,9 @@ const ManagePostComponent = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectPost, setSelectPost] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Vou receber da tela do mateus, quando clicar na postagem
   const id: number = 1;
 
   const themes = [
@@ -56,7 +61,6 @@ const ManagePostComponent = () => {
     "Biologia",
     "Tecnologia",
     "Informática",
-    "Saúde",
     "Economia",
     "Filosofia",
     "Sociologia",
@@ -77,7 +81,12 @@ const ManagePostComponent = () => {
       if (action === "edit") {
         try {
           const response = await api.get(`/posts/${id}`);
-          console.log("Post fetched:", response.data);
+          const post = response.data.data;
+          setTitle(post.title);
+          setDescricao(post.description);
+          setConteudo(post.content);
+          setAutor(post.author);
+          setTheme(post.subject);
           setSelectPost(response.data.data);
         } catch (error) {
           console.error("Erro ao buscar o post:", error);
@@ -89,37 +98,45 @@ const ManagePostComponent = () => {
   }, [title, descricao, autor, theme, id, action]);
 
   const createPost = async () => {
+    setIsLoading(true);
     try {
       const body = {
         title: title,
-        content: descricao,
+        description: descricao,
+        content: conteudo,
         author: autor,
         subject: theme,
       };
+      console.log("erro", body);
+
       const response = await api.post(`/posts`, body);
-      console.log("heyy1", response);
       setCreateSuccess(true);
     } catch (error) {
       console.error("Erro ao criar o post:", error);
       setCreateSuccess(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const editPost = async () => {
+    setIsLoading(true);
     try {
       const body = {
         title: title,
-        content: descricao,
+        description: descricao,
+        content: conteudo,
         author: autor,
         subject: theme,
       };
-      const response = await api.post(`/posts/admin/update`, body);
-      console.log("heyy2", response);
+      const response = await api.put(`/posts/admin/update`, body);
 
       setEditSuccess(true);
     } catch (error) {
       console.error("Erro ao criar o post:", error);
       setEditSuccess(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -127,6 +144,7 @@ const ManagePostComponent = () => {
     if (action === "criar") {
       setTitle("");
       setDescricao("");
+      setConteudo("");
       setAutor("");
       setTheme("");
     }
@@ -135,34 +153,37 @@ const ManagePostComponent = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    await createPost();
+    try {
+      await createPost();
 
-    if (createSuccess) {
       setShowCreateModal(false);
       setTitle("");
       setDescricao("");
+      setConteudo("");
       setAutor("");
       setTheme("");
       navigate("/login"); //Alterar para navegar para a tela do matheus
-    } else {
-      console.log("no");
+    } catch (error) {
+      console.log("Erro ao criar a postagem:", error);
       setShowCreateModal(true);
     }
   };
 
   const handleEdit = async (e: any) => {
     e.preventDefault();
-    await editPost();
 
-    if (editSuccess) {
+    try {
+      await editPost();
+
       setShowEditModal(false);
       setTitle("");
       setDescricao("");
+      setConteudo("");
       setAutor("");
       setTheme("");
       navigate("/login"); //Alterar para navegar para a tela do matheus
-    } else {
-      console.log("no");
+    } catch (error) {
+      console.log("Erro ao editar a postagem", error);
       setShowEditModal(true);
     }
   };
@@ -179,68 +200,82 @@ const ManagePostComponent = () => {
   return (
     <>
       <AppContainer>
-        <Container>
-          <Title>
-            {action === "create" ? "Criar Nova Postagem" : "Editar Postagem"}
-          </Title>
-          <form onSubmit={handleSubmit}>
-            {/* TÍTULO */}
-            <Label htmlFor="title">Título</Label>
-            <Input
-              type="text"
-              placeholder="Digite o título da postagem"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <Container>
+            <Title>
+              {action === "create" ? "Criar Nova Postagem" : "Editar Postagem"}
+            </Title>
+            <form onSubmit={handleSubmit}>
+              {/* TÍTULO */}
+              <Label htmlFor="title">Título</Label>
+              <Input
+                type="text"
+                placeholder="Digite o título da postagem"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
 
-            {/* DESCRIÇÃO */}
-            <Label htmlFor="title">Descrição</Label>
-            <Textarea
-              placeholder="Digite a descrição da postagem"
-              value={descricao}
-              onChange={(e) => setDescricao(e.target.value)}
-            />
+              {/* DESCRIÇÃO */}
+              <Label htmlFor="title">Descrição</Label>
+              <Textarea
+                placeholder="Digite a descrição da postagem"
+                value={descricao}
+                onChange={(e) => setDescricao(e.target.value)}
+              />
 
-            {/* AUTOR */}
-            <Label htmlFor="title">Autor</Label>
-            <Input
-              type="text"
-              placeholder="Digite o autor da postagem"
-              value={autor}
-              onChange={(e) => setAutor(e.target.value)}
-            />
+              {/* DESCRIÇÃO */}
+              <Label htmlFor="title">Conteúdo</Label>
+              <Textarea
+                placeholder="Digite o conteúdo da postagem"
+                value={conteudo}
+                onChange={(e) => setConteudo(e.target.value)}
+              />
 
-            {/* TEMA */}
-            <Label htmlFor="title">Tema</Label>
-            <Select
-              id="theme"
-              value={theme}
-              onChange={(e) => setTheme(e.target.value)}
-              required
-            >
-              <option value="" disabled>
-                Selecione o tema
-              </option>
-              {themes.map((themeValue) => (
-                <option key={themeValue} value={themeValue}>
-                  {themeValue}
-                </option>
-              ))}
-            </Select>
+              {/* AUTOR */}
+              <Label htmlFor="title">Autor</Label>
+              <Input
+                type="text"
+                placeholder="Digite o autor da postagem"
+                value={autor}
+                onChange={(e) => setAutor(e.target.value)}
+              />
 
-            <PositionButtons>
-              <BackButton onClick={handleBack}>Voltar</BackButton>
-              <Button
-                onClick={action === "create" ? handleSubmit : handleEdit}
-                // type="submit"
-                disabled={isSaveDisabled}
+              {/* TEMA */}
+              <Label htmlFor="title">Tema</Label>
+              <Select
+                id="theme"
+                value={theme}
+                onChange={(e) => setTheme(e.target.value)}
+                required
               >
-                {action === "create" ? "Criar" : "Salvar"}
-              </Button>
-            </PositionButtons>
-          </form>
-        </Container>
+                <option value="" disabled>
+                  Selecione o tema
+                </option>
+                {themes.map((themeValue) => (
+                  <option key={themeValue} value={themeValue}>
+                    {themeValue}
+                  </option>
+                ))}
+              </Select>
+
+              <PositionButtons>
+                <BackButton onClick={handleBack}>Voltar</BackButton>
+                <Button
+                  onClick={action === "create" ? handleSubmit : handleEdit}
+                  // type="submit"
+                  disabled={isSaveDisabled}
+                >
+                  {action === "create" ? "Criar" : "Salvar"}
+                </Button>
+              </PositionButtons>
+            </form>
+          </Container>
+        )}
       </AppContainer>
+
+      {/* MODAIS DE ERRO */}
       {showCreateModal && (
         <ModalOverlay>
           <ModalContainer>

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const AppContainer = styled.div`
   display: flex;
@@ -171,4 +171,23 @@ export const CloseButton = styled.button`
   &:hover {
     background-color: #d32f2f;
   }
+`;
+
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+export const Spinner = styled.div`
+  border: 4px solid rgba(128, 0, 32, 0.3);
+  border-top: 4px solid #800020;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: ${rotate} 1s linear infinite;
+  margin: auto;
 `;
