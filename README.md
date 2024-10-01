@@ -8,4 +8,4 @@ Após o sucesso do desenvolvimento da aplicação de blogging dinâmico utilizan
 A documentação pode ser acessada [neste link](https://docs.google.com/document/d/1RxqjrkkddA1Q-NLvJbqI2_wnggBk7iZduO3GOeQpBs4/edit?usp=sharing).
 
 ## Vídeo
-O vídeo pode ser acessado [neste link](#).
+O vídeo pode ser acessado [neste link](https://youtu.be/VFiX2_kmPLI?si=13-uitgolEBzsNKF).
