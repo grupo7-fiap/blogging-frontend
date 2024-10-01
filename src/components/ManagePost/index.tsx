@@ -1,6 +1,6 @@
-import { useNavigate, useLocation } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import api from "../../services/api";
+import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import api from '../../services/api';
 import {
   AppContainer,
   Container,
@@ -18,22 +18,24 @@ import {
   ModalBody,
   CloseButton,
   Spinner,
-} from "./style";
+} from './style';
 
 interface LocationState {
   action: string;
+  postId?: number;
 }
 
 const ManagePostComponent = () => {
   const location = useLocation();
   const state = location.state as LocationState;
-  const action = state?.action || "default";
+  const action = state?.action || 'default';
+  const postId = state?.postId || null;
 
-  const [title, setTitle] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [conteudo, setConteudo] = useState("");
-  const [autor, setAutor] = useState("");
-  const [theme, setTheme] = useState("");
+  const [title, setTitle] = useState('');
+  const [descricao, setDescricao] = useState('');
+  const [conteudo, setConteudo] = useState('');
+  const [autor, setAutor] = useState('');
+  const [theme, setTheme] = useState('');
   const navigate = useNavigate();
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [createSuccess, setCreateSuccess] = useState(false);
@@ -44,30 +46,27 @@ const ManagePostComponent = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  // Vou receber da tela do mateus, quando clicar na postagem
-  const id: number = 1;
-
   const themes = [
-    "Matemática",
-    "Ciências",
-    "História",
-    "Geografia",
-    "Literatura",
-    "Esporte",
-    "Saúde",
-    "Artes",
-    "Física",
-    "Química",
-    "Biologia",
-    "Tecnologia",
-    "Informática",
-    "Economia",
-    "Filosofia",
-    "Sociologia",
-    "Inglês",
-    "Francês",
-    "Espanhol",
-    "Anúncios",
+    'Matemática',
+    'Ciências',
+    'História',
+    'Geografia',
+    'Literatura',
+    'Esporte',
+    'Saúde',
+    'Artes',
+    'Física',
+    'Química',
+    'Biologia',
+    'Tecnologia',
+    'Informática',
+    'Economia',
+    'Filosofia',
+    'Sociologia',
+    'Inglês',
+    'Francês',
+    'Espanhol',
+    'Anúncios',
   ];
 
   useEffect(() => {
@@ -78,9 +77,9 @@ const ManagePostComponent = () => {
     }
 
     const returnSelectPost = async () => {
-      if (action === "edit") {
+      if (action === 'edit' && postId) {
         try {
-          const response = await api.get(`/posts/${id}`);
+          const response = await api.get(`/posts/${postId}`);
           const post = response.data.data;
           setTitle(post.title);
           setDescricao(post.description);
@@ -89,13 +88,13 @@ const ManagePostComponent = () => {
           setTheme(post.subject);
           setSelectPost(response.data.data);
         } catch (error) {
-          console.error("Erro ao buscar o post:", error);
+          console.error('Erro ao buscar o post:', error);
         }
       }
     };
 
     returnSelectPost();
-  }, [title, descricao, autor, theme, id, action]);
+  }, [title, descricao, autor, theme, postId, action]);
 
   const createPost = async () => {
     setIsLoading(true);
@@ -107,12 +106,12 @@ const ManagePostComponent = () => {
         author: autor,
         subject: theme,
       };
-      console.log("erro", body);
+      console.log('erro', body);
 
       const response = await api.post(`/posts`, body);
       setCreateSuccess(true);
     } catch (error) {
-      console.error("Erro ao criar o post:", error);
+      console.error('Erro ao criar o post:', error);
       setCreateSuccess(false);
     } finally {
       setIsLoading(false);
@@ -129,11 +128,11 @@ const ManagePostComponent = () => {
         author: autor,
         subject: theme,
       };
-      const response = await api.put(`/posts/admin/update`, body);
+      const response = await api.put(`/posts/admin/update/${postId}`, body);
 
       setEditSuccess(true);
     } catch (error) {
-      console.error("Erro ao criar o post:", error);
+      console.error('Erro ao criar o post:', error);
       setEditSuccess(false);
     } finally {
       setIsLoading(false);
@@ -141,14 +140,14 @@ const ManagePostComponent = () => {
   };
 
   const handleBack = () => {
-    if (action === "criar") {
-      setTitle("");
-      setDescricao("");
-      setConteudo("");
-      setAutor("");
-      setTheme("");
+    if (action === 'criar') {
+      setTitle('');
+      setDescricao('');
+      setConteudo('');
+      setAutor('');
+      setTheme('');
     }
-    navigate("/login");
+    navigate('/posts/admin');
   };
 
   const handleSubmit = async (e: any) => {
@@ -157,14 +156,14 @@ const ManagePostComponent = () => {
       await createPost();
 
       setShowCreateModal(false);
-      setTitle("");
-      setDescricao("");
-      setConteudo("");
-      setAutor("");
-      setTheme("");
-      navigate("/login"); //Alterar para navegar para a tela do matheus
+      setTitle('');
+      setDescricao('');
+      setConteudo('');
+      setAutor('');
+      setTheme('');
+      navigate('/posts/admin');
     } catch (error) {
-      console.log("Erro ao criar a postagem:", error);
+      console.log('Erro ao criar a postagem:', error);
       setShowCreateModal(true);
     }
   };
@@ -176,14 +175,14 @@ const ManagePostComponent = () => {
       await editPost();
 
       setShowEditModal(false);
-      setTitle("");
-      setDescricao("");
-      setConteudo("");
-      setAutor("");
-      setTheme("");
-      navigate("/login"); //Alterar para navegar para a tela do matheus
+      setTitle('');
+      setDescricao('');
+      setConteudo('');
+      setAutor('');
+      setTheme('');
+      navigate('/posts/admin');
     } catch (error) {
-      console.log("Erro ao editar a postagem", error);
+      console.log('Erro ao editar a postagem', error);
       setShowEditModal(true);
     }
   };
@@ -205,7 +204,7 @@ const ManagePostComponent = () => {
         ) : (
           <Container>
             <Title>
-              {action === "create" ? "Criar Nova Postagem" : "Editar Postagem"}
+              {action === 'create' ? 'Criar Nova Postagem' : 'Editar Postagem'}
             </Title>
             <form onSubmit={handleSubmit}>
               {/* TÍTULO */}
@@ -263,11 +262,11 @@ const ManagePostComponent = () => {
               <PositionButtons>
                 <BackButton onClick={handleBack}>Voltar</BackButton>
                 <Button
-                  onClick={action === "create" ? handleSubmit : handleEdit}
+                  onClick={action === 'create' ? handleSubmit : handleEdit}
                   // type="submit"
                   disabled={isSaveDisabled}
                 >
-                  {action === "create" ? "Criar" : "Salvar"}
+                  {action === 'create' ? 'Criar' : 'Salvar'}
                 </Button>
               </PositionButtons>
             </form>

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
@@ -7,9 +7,8 @@ export const Container = styled.div`
   padding: 20px;
   background-color: #1c1c1c;
   color: #ffffff;
-  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  box-sizing: border-box; 
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
     padding: 10px;
@@ -19,7 +18,7 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
   text-align: center;
-  color: #800020;
+  color: #ffffff;
   margin-bottom: 40px;
 `;
 
@@ -34,7 +33,7 @@ export const PostsGrid = styled.div`
 `;
 
 export const PostCard = styled.div`
-  background-color: #2e2e2e; 
+  background-color: #ffffff;
   border-radius: 8px;
   padding: 20px;
   display: flex;
@@ -56,7 +55,7 @@ export const PostTitle = styled.h2`
 
 export const PostDescription = styled.p`
   font-size: 1rem;
-  color: #c9c9c9;
+  color: #2e2e2e;
   margin-bottom: 20px;
 `;
 
@@ -77,16 +76,15 @@ export const ViewButton = styled.button`
 `;
 
 export const SearchBar = styled.input`
-  width: 100%;
+  width: 98%;
   padding: 10px;
   margin-bottom: 20px;
   border-radius: 8px;
   border: 1px solid #800020;
   font-size: 1rem;
-  color: #ffffff; 
-  background-color: #333333; 
+  color: #ffffff;
+  background-color: #333333;
 `;
-
 
 export const PostAuthor = styled.p`
   font-size: 1rem;
