@@ -1,6 +1,6 @@
-import { useNavigate, useLocation } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import api from '../../services/api';
+import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import api from "../../services/api";
 import {
   AppContainer,
   Container,
@@ -18,7 +18,8 @@ import {
   ModalBody,
   CloseButton,
   Spinner,
-} from './style';
+  TextareaDescription,
+} from "./style";
 
 interface LocationState {
   action: string;
@@ -28,14 +29,14 @@ interface LocationState {
 const ManagePostComponent = () => {
   const location = useLocation();
   const state = location.state as LocationState;
-  const action = state?.action || 'default';
+  const action = state?.action || "default";
   const postId = state?.postId || null;
 
-  const [title, setTitle] = useState('');
-  const [descricao, setDescricao] = useState('');
-  const [conteudo, setConteudo] = useState('');
-  const [autor, setAutor] = useState('');
-  const [theme, setTheme] = useState('');
+  const [title, setTitle] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [conteudo, setConteudo] = useState("");
+  const [autor, setAutor] = useState("");
+  const [theme, setTheme] = useState("");
   const navigate = useNavigate();
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [createSuccess, setCreateSuccess] = useState(false);
@@ -47,26 +48,26 @@ const ManagePostComponent = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const themes = [
-    'Matemática',
-    'Ciências',
-    'História',
-    'Geografia',
-    'Literatura',
-    'Esporte',
-    'Saúde',
-    'Artes',
-    'Física',
-    'Química',
-    'Biologia',
-    'Tecnologia',
-    'Informática',
-    'Economia',
-    'Filosofia',
-    'Sociologia',
-    'Inglês',
-    'Francês',
-    'Espanhol',
-    'Anúncios',
+    "Matemática",
+    "Ciências",
+    "História",
+    "Geografia",
+    "Literatura",
+    "Esporte",
+    "Saúde",
+    "Artes",
+    "Física",
+    "Química",
+    "Biologia",
+    "Tecnologia",
+    "Informática",
+    "Economia",
+    "Filosofia",
+    "Sociologia",
+    "Inglês",
+    "Francês",
+    "Espanhol",
+    "Anúncios",
   ];
 
   useEffect(() => {
@@ -77,7 +78,7 @@ const ManagePostComponent = () => {
     }
 
     const returnSelectPost = async () => {
-      if (action === 'edit' && postId) {
+      if (action === "edit" && postId) {
         try {
           const response = await api.get(`/posts/${postId}`);
           const post = response.data.data;
@@ -88,7 +89,7 @@ const ManagePostComponent = () => {
           setTheme(post.subject);
           setSelectPost(response.data.data);
         } catch (error) {
-          console.error('Erro ao buscar o post:', error);
+          console.error("Erro ao buscar o post:", error);
         }
       }
     };
@@ -106,12 +107,12 @@ const ManagePostComponent = () => {
         author: autor,
         subject: theme,
       };
-      console.log('erro', body);
+      console.log("erro", body);
 
       const response = await api.post(`/posts`, body);
       setCreateSuccess(true);
     } catch (error) {
-      console.error('Erro ao criar o post:', error);
+      console.error("Erro ao criar o post:", error);
       setCreateSuccess(false);
     } finally {
       setIsLoading(false);
@@ -132,7 +133,7 @@ const ManagePostComponent = () => {
 
       setEditSuccess(true);
     } catch (error) {
-      console.error('Erro ao criar o post:', error);
+      console.error("Erro ao criar o post:", error);
       setEditSuccess(false);
     } finally {
       setIsLoading(false);
@@ -140,14 +141,14 @@ const ManagePostComponent = () => {
   };
 
   const handleBack = () => {
-    if (action === 'criar') {
-      setTitle('');
-      setDescricao('');
-      setConteudo('');
-      setAutor('');
-      setTheme('');
+    if (action === "criar") {
+      setTitle("");
+      setDescricao("");
+      setConteudo("");
+      setAutor("");
+      setTheme("");
     }
-    navigate('/posts/admin');
+    navigate("/posts/admin");
   };
 
   const handleSubmit = async (e: any) => {
@@ -156,14 +157,14 @@ const ManagePostComponent = () => {
       await createPost();
 
       setShowCreateModal(false);
-      setTitle('');
-      setDescricao('');
-      setConteudo('');
-      setAutor('');
-      setTheme('');
-      navigate('/posts/admin');
+      setTitle("");
+      setDescricao("");
+      setConteudo("");
+      setAutor("");
+      setTheme("");
+      navigate("/posts/admin");
     } catch (error) {
-      console.log('Erro ao criar a postagem:', error);
+      console.log("Erro ao criar a postagem:", error);
       setShowCreateModal(true);
     }
   };
@@ -175,14 +176,14 @@ const ManagePostComponent = () => {
       await editPost();
 
       setShowEditModal(false);
-      setTitle('');
-      setDescricao('');
-      setConteudo('');
-      setAutor('');
-      setTheme('');
-      navigate('/posts/admin');
+      setTitle("");
+      setDescricao("");
+      setConteudo("");
+      setAutor("");
+      setTheme("");
+      navigate("/posts/admin");
     } catch (error) {
-      console.log('Erro ao editar a postagem', error);
+      console.log("Erro ao editar a postagem", error);
       setShowEditModal(true);
     }
   };
@@ -204,7 +205,7 @@ const ManagePostComponent = () => {
         ) : (
           <Container>
             <Title>
-              {action === 'create' ? 'Criar Nova Postagem' : 'Editar Postagem'}
+              {action === "create" ? "Criar Nova Postagem" : "Editar Postagem"}
             </Title>
             <form onSubmit={handleSubmit}>
               {/* TÍTULO */}
@@ -218,13 +219,13 @@ const ManagePostComponent = () => {
 
               {/* DESCRIÇÃO */}
               <Label htmlFor="title">Descrição</Label>
-              <Textarea
+              <TextareaDescription
                 placeholder="Digite a descrição da postagem"
                 value={descricao}
                 onChange={(e) => setDescricao(e.target.value)}
               />
 
-              {/* DESCRIÇÃO */}
+              {/* CONTEUDO */}
               <Label htmlFor="title">Conteúdo</Label>
               <Textarea
                 placeholder="Digite o conteúdo da postagem"
@@ -262,11 +263,11 @@ const ManagePostComponent = () => {
               <PositionButtons>
                 <BackButton onClick={handleBack}>Voltar</BackButton>
                 <Button
-                  onClick={action === 'create' ? handleSubmit : handleEdit}
+                  onClick={action === "create" ? handleSubmit : handleEdit}
                   // type="submit"
                   disabled={isSaveDisabled}
                 >
-                  {action === 'create' ? 'Criar' : 'Salvar'}
+                  {action === "create" ? "Criar" : "Salvar"}
                 </Button>
               </PositionButtons>
             </form>
