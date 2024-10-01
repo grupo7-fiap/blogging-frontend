@@ -9,7 +9,7 @@ export const Container = styled.div`
   color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  box-sizing: border-box; /* Adicione isso para incluir padding na largura total */
+  box-sizing: border-box; 
 
   @media (max-width: 768px) {
     padding: 10px;
