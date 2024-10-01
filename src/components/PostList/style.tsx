@@ -2,14 +2,18 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  /* max-width: 1200px; */
+  min-height: 100vh;
   margin: 0 auto;
   padding: 20px;
-  background-color: #1c1c1c; // fundo escuro, semelhante ao da imagem
+  background-color: #1c1c1c;
   color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box; 
 
   @media (max-width: 768px) {
     padding: 10px;
+    margin: 20px;
   }
 `;
 
@@ -30,7 +34,7 @@ export const PostsGrid = styled.div`
 `;
 
 export const PostCard = styled.div`
-  background-color: #2e2e2e; // cor para as cartas de cada post
+  background-color: #2e2e2e; 
   border-radius: 8px;
   padding: 20px;
   display: flex;
@@ -52,7 +56,7 @@ export const PostTitle = styled.h2`
 
 export const PostDescription = styled.p`
   font-size: 1rem;
-  color: #c9c9c9; // cor do texto de descrição
+  color: #c9c9c9;
   margin-bottom: 20px;
 `;
 
@@ -70,4 +74,23 @@ export const ViewButton = styled.button`
     background-color: #800020;
     transition: background-color 0.3s ease;
   }
+`;
+
+export const SearchBar = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #800020;
+  font-size: 1rem;
+  color: #ffffff; 
+  background-color: #333333; 
+`;
+
+
+export const PostAuthor = styled.p`
+  font-size: 1rem;
+  color: #800020;
+  margin-top: 10px;
+  font-style: italic;
 `;
