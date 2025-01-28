@@ -9,6 +9,7 @@ import {
   PostAuthor,
   ViewButton,
   SearchBar,
+  LayoutButtons,
 } from "./style";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
@@ -72,10 +73,12 @@ const PostList: React.FC = () => {
                 {post.description || "Sem descrição"}
               </PostDescription>
               <PostAuthor>Autor: {post.author || "Desconhecido"}</PostAuthor>
-              <ViewButton onClick={() => handleViewPost(post.id)}>
-                Visualizar
-              </ViewButton>
-              <ViewButton onClick={openModal}>Quiz</ViewButton>
+              <LayoutButtons>
+                <ViewButton onClick={() => handleViewPost(post.id)}>
+                  Visualizar
+                </ViewButton>
+                <ViewButton onClick={openModal}>Quiz</ViewButton>
+              </LayoutButtons>
             </PostCard>
           ))}
         </PostsGrid>

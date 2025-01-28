@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
@@ -91,4 +91,10 @@ export const PostAuthor = styled.p`
   color: #800020;
   margin-top: 10px;
   font-style: italic;
+`;
+
+export const LayoutButtons = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 `;
