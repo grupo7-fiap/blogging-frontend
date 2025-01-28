@@ -7,6 +7,7 @@ import {
   MainText,
   Divider,
 } from "./style";
+import Modal from "../ModalQuiz";
 
 const HomeComponent = () => {
   const navigate = useNavigate();
