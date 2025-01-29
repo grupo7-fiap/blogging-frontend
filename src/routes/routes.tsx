@@ -1,12 +1,13 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomeComponent from '../components/HomeComponent';
-import LoginComponent from '../components/LoginComponent';
-import ManagePostComponent from '../components/ManagePost';
-import { AuthProvider } from '../context/AuthContext';
-import ProtectedRoute from '../components/ProtectedRoute';
-import PostDetails from '../components/PostDetails';
-import PostList from '../components/PostList';
-import AdminPostList from '../components/AdminPostList';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomeComponent from "../components/HomeComponent";
+import LoginComponent from "../components/LoginComponent";
+import ManagePostComponent from "../components/ManagePost";
+import { AuthProvider } from "../context/AuthContext";
+import ProtectedRoute from "../components/ProtectedRoute";
+import PostDetails from "../components/PostDetails";
+import PostList from "../components/PostList";
+import AdminPostList from "../components/AdminPostList";
+import LoginStudentComponent from "../components/LoginStudent";
 
 const AppRoutes = () => {
   return (
@@ -24,6 +25,10 @@ const AppRoutes = () => {
           <Route
             path="/posts/admin"
             element={<ProtectedRoute element={<AdminPostList />} />}
+          />
+          <Route
+            path="/loginS"
+            element={<ProtectedRoute element={<LoginStudentComponent />} />}
           />
         </Routes>
       </Router>

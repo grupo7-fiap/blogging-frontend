@@ -16,8 +16,8 @@ const HomeComponent = () => {
     navigate("/login");
   };
 
-  const goToPostList = () => {
-    navigate("/posts");
+  const goToLoginStudents = () => {
+    navigate("/loginS");
   };
 
   return (
@@ -29,7 +29,7 @@ const HomeComponent = () => {
           <ButtonText>Acesse o portal de professores e funcionários</ButtonText>
         </StyledButton>
 
-        <StyledButton onClick={goToPostList}>
+        <StyledButton onClick={goToLoginStudents}>
           <MainText>ALUNOS</MainText>
           <Divider />
           <ButtonText>Acesse o portal de estudantes</ButtonText>

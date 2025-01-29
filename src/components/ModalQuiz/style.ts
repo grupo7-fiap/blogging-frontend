@@ -8,16 +8,17 @@ export const Overlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 999;
+  backdrop-filter: blur(10px);
 `;
 
 export const ModalContainer = styled.div`
-  background: white;
   padding: 24px;
   border-radius: 8px;
-  max-width: 500px;
+  max-width: 800px;
   width: 100%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 20px #800020;
   position: relative;
+  background-color: black;
 `;
 
 export const CloseButton = styled.button`
@@ -26,9 +27,9 @@ export const CloseButton = styled.button`
   right: 8px;
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 32px;
   cursor: pointer;
-  color: #333;
+  color: #800020;
 
   &:hover {
     color: #000;
