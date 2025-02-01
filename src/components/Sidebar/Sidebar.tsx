@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaUserCircle } from 'react-icons/fa'; // Usando ícone de usuário
+import React from "react";
+import { FaUserCircle } from "react-icons/fa"; // Usando ícone de usuário
 import {
   SidebarContainer,
   UserIcon,
@@ -7,8 +7,8 @@ import {
   Divider,
   NavLinks,
   NavLinkItem,
-} from './SidebarStyle';
-import { useNavigate } from 'react-router-dom';
+} from "./SidebarStyle";
+import { useNavigate } from "react-router-dom";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -27,7 +27,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
         <UserName>Bem-vindo(a)</UserName>
         <Divider />
         <NavLinks>
-          <NavLinkItem onClick={() => navigate('/login')}>Sair</NavLinkItem>
+          <NavLinkItem onClick={() => navigate("/posts/admin")}>
+            Postagens
+          </NavLinkItem>
+          <NavLinkItem onClick={() => navigate("/alunos")}>Alunos</NavLinkItem>
+          <NavLinkItem onClick={() => navigate("/login")}>Sair</NavLinkItem>
         </NavLinks>
       </SidebarContainer>
     </>
