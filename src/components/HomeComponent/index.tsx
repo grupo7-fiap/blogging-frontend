@@ -17,7 +17,7 @@ const HomeComponent = () => {
   };
 
   const goToLoginStudents = () => {
-    navigate("/loginS");
+    navigate("/posts");
   };
 
   return (

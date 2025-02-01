@@ -74,11 +74,13 @@ const PostList: React.FC = () => {
     },
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userAnswers, setUserAnswers] = useState<{ [key: number]: string }>({});
+  const [score, setScore] = useState<number | null>(null);
+  const [feedback, setFeedback] = useState<{ [key: number]: string }>({});
 
   const openModal = async (id: number) => {
     try {
       const response = await api.get(`/posts/quiz/${id}`);
-
       setData(response.data);
       setIsModalOpen(true);
     } catch (error) {
@@ -89,10 +91,9 @@ const PostList: React.FC = () => {
   const closeModal = () => {
     setUserAnswers({});
     setScore(null);
+    setFeedback({});
     setIsModalOpen(false);
   };
-  const [userAnswers, setUserAnswers] = useState<{ [key: number]: string }>({});
-  const [score, setScore] = useState<number | null>(null);
 
   const shuffleOptions = (options: string[]) => {
     for (let i = options.length - 1; i > 0; i--) {
@@ -104,22 +105,21 @@ const PostList: React.FC = () => {
   const [shuffledQuestions, setShuffledQuestions] = useState<any[]>([]);
 
   useEffect(() => {
-    const shuffledData = data.questions.questions.map((question) => {
-      const shuffledOptions = [...question.options];
-      shuffleOptions(shuffledOptions);
+    if (data.questions.questions.length > 0) {
+      const shuffledData = data.questions.questions.map((question) => {
+        const shuffledOptions = [...question.options];
+        shuffleOptions(shuffledOptions);
 
-      const correctAnswer = question.options[0];
-      const correctIndex = shuffledOptions.indexOf(correctAnswer);
+        return {
+          question: question.question,
+          options: shuffledOptions,
+          correctAnswer: question.options[0],
+        };
+      });
 
-      return {
-        question: question.question,
-        options: shuffledOptions,
-        correctAnswer: correctAnswer,
-        correctIndex: correctIndex,
-      };
-    });
-    setShuffledQuestions(shuffledData);
-  }, []);
+      setShuffledQuestions(shuffledData);
+    }
+  }, [data]);
 
   const handleAnswerChange = (
     questionIndex: number,
@@ -134,14 +134,26 @@ const PostList: React.FC = () => {
   const calculateScore = () => {
     let correctCount = 0;
 
+    // Criando um novo objeto para armazenar o feedback
+    let newFeedback: { [key: number]: string } = {};
+
     shuffledQuestions.forEach((q, index) => {
       if (userAnswers[index] === q.correctAnswer) {
         correctCount++;
+        newFeedback[index] = "Correto!";
+      } else {
+        newFeedback[index] = `Errado! Resposta correta: ${q.correctAnswer}`;
       }
     });
 
+    setFeedback((prevFeedback) => ({
+      ...prevFeedback,
+      ...newFeedback,
+    }));
+
     setScore((correctCount / shuffledQuestions.length) * 100);
   };
+
 
   const isSubmitDisabled = shuffledQuestions.some(
     (_, index) => !userAnswers[index]
@@ -193,6 +205,15 @@ const PostList: React.FC = () => {
                 {option}
               </LabelQuestions>
             ))}
+            <p
+              style={{
+                color: feedback[index] === "Correto!" ? "green" : "red",
+                fontWeight: "bold",
+                marginTop: "5px",
+              }}
+            >
+              {feedback[index]}
+            </p>
           </LayoutQuestion>
         ))}
         <LayoutScore>
