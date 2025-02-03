@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
@@ -92,3 +92,56 @@ export const PostAuthor = styled.p`
   margin-top: 10px;
   font-style: italic;
 `;
+
+export const LayoutButtons = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: end;
+`;
+
+// MODAL
+
+export const TitleModal = styled.text`
+  font-size: 32px;
+  color: white;
+  font-weight: 500;
+`;
+
+export const LayoutScore = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+`;
+
+export const ButtonModal = styled.button`
+  font-size: 20px;
+  background-color: #800020;
+  color: white;
+  font-weight: 500;
+  border-radius: 6px;
+  height: 46px;
+  width: auto;
+  cursor: pointer;
+  border: none;
+`;
+
+export const ScoreText = styled.text`
+  font-size: 18px;
+  color: white;
+`;
+
+export const QuestionsText = styled.text`
+  font-size: 20px;
+  color: white;
+`;
+
+export const LayoutQuestion = styled.div`
+  margin-bottom: 20px;
+  margin-top: 20px;
+`;
+
+export const LabelQuestions = styled.div`
+  color: white;
+`;
+
